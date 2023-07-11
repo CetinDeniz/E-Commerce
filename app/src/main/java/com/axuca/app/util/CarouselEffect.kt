@@ -3,6 +3,7 @@ package com.axuca.app.util
 import androidx.viewpager2.widget.ViewPager2
 import kotlin.math.abs
 
+/** Add auto-slide functionality */
 fun ViewPager2.addCarouselEffect() {
     clipChildren = false    // No clipping the left and right items
     clipToPadding = false   // Show the viewpager in full width without clipping the padding

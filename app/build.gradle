@@ -53,16 +53,6 @@ android {
 }
 
 dependencies {
-    // MVVM, clean architecture, repository, use cases, coroutine, flow, hilt-dagger,  retrofit-okhttp , moshi-codegen, glide
-    // bottom nav customizations , toolbar , deeplink , broadcast receiver, push notifications (firebase fcm)
-    // interceptor, chucker, crashlytics, pagination, image full screen when click
-
-    // test
-    // datastore , tab layout , animations , work manager, compose
-    // gradle, build types, build variants, product flavors
-
-    // getirdeki gibi anasayfanın üst kısmında auto-slide viewpager, sol ve sağdaki itemin heightı küçük
-
     implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'

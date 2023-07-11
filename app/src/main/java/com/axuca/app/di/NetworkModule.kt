@@ -2,7 +2,7 @@ package com.axuca.app.di
 
 import android.content.Context
 import com.axuca.app.BuildConfig
-import com.axuca.app.data.HttpRequestInterceptor
+import com.axuca.app.data.repository.NetworkRepository
 import com.axuca.app.data.source.network.NetworkService
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
@@ -13,6 +13,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
@@ -23,7 +24,18 @@ internal object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(@ApplicationContext context: Context): OkHttpClient {
+    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+    }
+
+    @Provides
+    @Singleton
+    fun provideOkHttpClient(
+        @ApplicationContext context: Context,
+        loggingInterceptor: HttpLoggingInterceptor
+    ): OkHttpClient {
         val okHttpClientBuilder = OkHttpClient.Builder()
 
         if (BuildConfig.DEBUG) {
@@ -40,7 +52,7 @@ internal object NetworkModule {
                 .build()
 
             okHttpClientBuilder.addInterceptor(chuckerInterceptor)
-            okHttpClientBuilder.addInterceptor(HttpRequestInterceptor())
+            okHttpClientBuilder.addInterceptor(loggingInterceptor)
         }
 
         return okHttpClientBuilder.build()
@@ -60,6 +72,12 @@ internal object NetworkModule {
     @Singleton
     fun provideNetworkService(retrofit: Retrofit): NetworkService {
         return retrofit.create(NetworkService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideNetworkRepository(networkService: NetworkService): NetworkRepository {
+        return NetworkRepository(networkService)
     }
 
 }

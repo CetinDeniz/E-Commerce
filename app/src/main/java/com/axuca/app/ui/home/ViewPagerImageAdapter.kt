@@ -2,6 +2,7 @@ package com.axuca.app.ui.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.axuca.app.R
@@ -35,7 +36,8 @@ class ViewPagerImageAdapter(
     class ImageViewHolder(private val binding: ViewPager2ItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(resID: Int) {
-//            binding.image.setImageResource(R.drawable.ic_home_black_24dp)
+            val color = ContextCompat.getColor(binding.root.context, resID)
+            binding.image.setBackgroundColor(color)
         }
     }
 }
