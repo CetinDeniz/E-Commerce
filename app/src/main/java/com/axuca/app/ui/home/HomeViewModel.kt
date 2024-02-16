@@ -26,32 +26,13 @@ class HomeViewModel @Inject constructor(
     val state = MutableStateFlow<HomeState?>(null)
 
     init {
-        viewModelScope.launch {
-            Timber.d("ViewModel init")
-            networkRepository.getProducts().collect {
-                state.emit(
-                    when (it) {
-                        is Resource.Loading -> {
-                            Timber.d("Loading")
-                            HomeState.Loading
-                        }
-                        is Resource.Success -> {
-                            Timber.d(it.data.size.toString())
-                            HomeState.AllProducts(data = it.data)
-                        }
-                        is Resource.Error -> {
-                            Timber.d("Error : ${it.error.stackTrace}")
-                            HomeState.Error(throwable = it.error)
-                        }
-                    }
-                )
-            }
+        networkRepository.getProducts().launchRequest {
+            state.emit(HomeState.AllProducts(it))
         }
     }
 
     sealed class HomeState {
         class AllProducts(val data: List<Product>) : HomeState()
-        object Loading : HomeState()
         class Error(val throwable: Throwable) : HomeState()
     }
 }

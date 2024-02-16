@@ -15,8 +15,8 @@ import me.ibrahimsn.lib.SmoothBottomBar
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,10 +24,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navView: SmoothBottomBar = binding.navView // : BottomNavigationView
-
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
-        navController = navHostFragment.findNavController()
+        initializeNavController()
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -38,9 +35,22 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
 
+        setBottomNavigation()
+    }
+
+    private fun initializeNavController() {
+        val navHostFragment = supportFragmentManager.findFragmentById(
+            R.id.nav_host_fragment_activity_main
+        ) as NavHostFragment
+
+        navController = navHostFragment.findNavController()
+    }
+
+    private fun setBottomNavigation() {
         val menu = PopupMenu(applicationContext, null).apply {
             inflate(R.menu.bottom_nav_menu)
         }.menu
+        val navView: SmoothBottomBar = binding.navView // : BottomNavigationView
         navView.setupWithNavController(menu, navController)
     }
 

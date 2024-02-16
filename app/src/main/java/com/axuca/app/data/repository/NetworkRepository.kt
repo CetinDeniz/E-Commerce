@@ -38,11 +38,13 @@ class NetworkRepository @Inject constructor(
                             }
                         }
                     }
-
                     is Resource.Loading -> Resource.Loading
                     else -> it as Resource<V>
                 }
             }
-            .catch { cause: Throwable -> emit(Resource.Error(cause)) }
+            .catch { cause: Throwable ->
+                cause.printStackTrace()
+                emit(Resource.Error(cause))
+            }
             .flowOn(Dispatchers.IO) // This affects only the upper flows
 }
