@@ -1,20 +1,11 @@
 package com.axuca.app.ui.home
 
-import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.flowWithLifecycle
-import androidx.lifecycle.lifecycleScope
 import com.axuca.app.R
-import com.axuca.app.base.BaseFragment
 import com.axuca.app.base.BaseViewModelFragment
 import com.axuca.app.databinding.FragmentHomeBinding
 import com.axuca.app.util.addCarouselEffect
@@ -22,9 +13,6 @@ import com.axuca.app.util.observe
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Runnable
-import kotlinx.coroutines.flow.onCompletion
-import kotlinx.coroutines.launch
-import timber.log.Timber
 
 @AndroidEntryPoint
 class HomeFragment : BaseViewModelFragment<FragmentHomeBinding, HomeViewModel>() {

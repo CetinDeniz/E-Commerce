@@ -7,10 +7,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 
 abstract class BaseViewModel : ViewModel() {
-    private val baseState = MutableStateFlow<State?>(null)
+    val baseState = MutableStateFlow<State?>(null)
 
     fun <T> Flow<Resource<T>>.launchRequest(
         onError: () -> Unit = {},
