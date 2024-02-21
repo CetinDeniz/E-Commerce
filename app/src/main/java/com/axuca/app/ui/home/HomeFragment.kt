@@ -1,5 +1,6 @@
 package com.axuca.app.ui.home
 
+import android.graphics.BlurMaskFilter.Blur
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -35,9 +36,6 @@ class HomeFragment : BaseViewModelFragment<FragmentHomeBinding, HomeViewModel>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.text.observe(viewLifecycleOwner) {
-            binding.textHome.text = it
-        }
         observe(viewModel.state, ::onStateChanged)
 
         val adapter = ViewPagerImageAdapter(
@@ -50,7 +48,12 @@ class HomeFragment : BaseViewModelFragment<FragmentHomeBinding, HomeViewModel>()
     }
 
     private fun onStateChanged(homeState: HomeViewModel.HomeState?) {
-        Snackbar.make(binding.root, homeState.toString(), Snackbar.LENGTH_SHORT).show()
+        when(homeState) {
+            is HomeViewModel.HomeState.AllProducts -> {
+                Snackbar.make(binding.root, homeState.data.size.toString(), Snackbar.LENGTH_SHORT).show()
+            }
+            else -> {}
+        }
     }
 
     private fun startAutoScroll() {

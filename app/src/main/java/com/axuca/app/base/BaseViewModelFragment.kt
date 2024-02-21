@@ -16,10 +16,8 @@ abstract class BaseViewModelFragment<B : ViewDataBinding, V : BaseViewModel> : B
     protected abstract val viewModel: V
 
     protected abstract val layoutResourceID: Int
-
     private var _binding: B? = null
-    protected val binding: B
-        get() = _binding!!
+    protected val binding: B get() = _binding!!
 
     private var loadingOverlay: LoadingOverlayBinding? = null
 
@@ -32,8 +30,8 @@ abstract class BaseViewModelFragment<B : ViewDataBinding, V : BaseViewModel> : B
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observeBaseViewModelState()
         binding.lifecycleOwner = viewLifecycleOwner
+        observeBaseViewModelState()
     }
 
     private fun inflateBinding(inflater: LayoutInflater, container: ViewGroup?) {
@@ -81,17 +79,15 @@ abstract class BaseViewModelFragment<B : ViewDataBinding, V : BaseViewModel> : B
                 PixelFormat.TRANSLUCENT
             )
 
-            val windowManager = requireActivity().windowManager
-            windowManager.addView(loadingOverlay?.root, params)
+            requireActivity().windowManager.addView(loadingOverlay?.root, params)
             binding.root.visibility = View.INVISIBLE
         }
     }
 
     private fun hideFullScreenOverlay() {
         loadingOverlay?.let {
-            val windowManager = requireActivity().windowManager
-            windowManager.removeViewImmediate(it.root)
             loadingOverlay = null
+            requireActivity().windowManager.removeViewImmediate(it.root)
             binding.root.visibility = View.VISIBLE
         }
     }

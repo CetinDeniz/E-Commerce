@@ -12,13 +12,14 @@ abstract class BaseViewModel : ViewModel() {
     val baseState = MutableStateFlow<State?>(null)
 
     fun <T> Flow<Resource<T>>.launchRequest(
+        emitLoading: Boolean = true,
         onError: () -> Unit = {},
-        onComplete: suspend (T) -> Unit = {}
+        onComplete: suspend (T) -> Unit = {},
     ) {
         onEach {
             when (it) {
                 is Resource.Loading -> {
-                    baseState.emit(State.Loading)
+                    if (emitLoading) baseState.emit(State.Loading)
                 }
 
                 is Resource.Success -> {

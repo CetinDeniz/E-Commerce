@@ -27,6 +27,7 @@
             android:layout_height="70dp"
             app:backgroundColor="?attr/colorPrimary"
             app:cornerRadius="12dp"
+            app:indicatorRadius="@dimen/dp8"
             app:iconSize="24dp"
             app:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"

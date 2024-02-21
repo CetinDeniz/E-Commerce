@@ -14,11 +14,6 @@ class HomeViewModel @Inject constructor(
     private val networkRepository: NetworkRepository
 ) : BaseViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
-    }
-    val text: LiveData<String> = _text
-
     val state = MutableStateFlow<HomeState?>(null)
 
     init {
