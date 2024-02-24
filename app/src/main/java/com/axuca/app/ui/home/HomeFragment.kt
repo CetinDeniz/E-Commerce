@@ -6,8 +6,11 @@ import android.os.Looper
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.axuca.app.R
+import com.axuca.app.base.adapter.BaseAdapter
 import com.axuca.app.base.fragment.BaseViewModelFragment
+import com.axuca.app.data.model.Product
 import com.axuca.app.databinding.FragmentHomeBinding
+import com.axuca.app.databinding.HomeProductItemBinding
 import com.axuca.app.util.addCarouselEffect
 import com.axuca.app.util.observe
 import com.google.android.material.snackbar.Snackbar
@@ -44,12 +47,20 @@ class HomeFragment : BaseViewModelFragment<FragmentHomeBinding, HomeViewModel>()
         binding.viewpager.adapter = adapter
         binding.viewpager.addCarouselEffect()
         startAutoScroll()
+
+        val adapter2 = object: BaseAdapter<HomeProductItemBinding, Product>(R.layout.home_product_item) {
+            override fun bind(binding: HomeProductItemBinding, item: Product) {
+                binding.product = item
+            }
+        }
+        binding.productsRecycler.adapter = adapter2
     }
 
     private fun onStateChanged(homeState: HomeViewModel.HomeState?) {
         when(homeState) {
             is HomeViewModel.HomeState.AllProducts -> {
                 Snackbar.make(binding.root, homeState.data.size.toString(), Snackbar.LENGTH_SHORT).show()
+                (binding.productsRecycler.adapter as? BaseAdapter<*,Product>)?.submitItems(homeState.data)
             }
             else -> {}
         }
