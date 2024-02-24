@@ -1,4 +1,4 @@
-package com.axuca.app.base
+package com.axuca.app.base.fragment
 
 import androidx.fragment.app.Fragment
 

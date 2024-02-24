@@ -1,4 +1,4 @@
-package com.axuca.app.base
+package com.axuca.app.base.fragment
 
 import android.graphics.PixelFormat
 import android.os.Bundle
@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.axuca.app.base.viewmodel.BaseViewModel
+import com.axuca.app.base.State
 import com.axuca.app.databinding.LoadingOverlayBinding
 import com.axuca.app.util.observe
 import timber.log.Timber

@@ -1,13 +1,12 @@
 package com.axuca.app.ui.home
 
-import android.graphics.BlurMaskFilter.Blur
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.axuca.app.R
-import com.axuca.app.base.BaseViewModelFragment
+import com.axuca.app.base.fragment.BaseViewModelFragment
 import com.axuca.app.databinding.FragmentHomeBinding
 import com.axuca.app.util.addCarouselEffect
 import com.axuca.app.util.observe

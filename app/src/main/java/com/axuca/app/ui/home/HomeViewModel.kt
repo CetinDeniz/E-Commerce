@@ -1,8 +1,6 @@
 package com.axuca.app.ui.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.axuca.app.base.BaseViewModel
+import com.axuca.app.base.viewmodel.BaseViewModel
 import com.axuca.app.data.model.Product
 import com.axuca.app.data.repository.NetworkRepository
 import dagger.hilt.android.lifecycle.HiltViewModel

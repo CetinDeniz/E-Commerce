@@ -1,7 +1,8 @@
-package com.axuca.app.base
+package com.axuca.app.base.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.axuca.app.base.State
 import com.axuca.app.data.source.network.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
