@@ -12,7 +12,7 @@
             android:layout_height="wrap_content"
             android:clipChildren="false"
             android:clipToPadding="false"
-            tools:context=".ui.home.HomeFragment">
+            tools:context=".presentation.home.HomeFragment">
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewpager"

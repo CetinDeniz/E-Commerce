@@ -1,4 +1,4 @@
-package com.axuca.app.ui.notifications
+package com.axuca.app.presentation.notifications
 
 import android.os.Bundle
 import android.view.LayoutInflater

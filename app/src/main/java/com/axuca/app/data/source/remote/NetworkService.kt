@@ -1,6 +1,6 @@
-package com.axuca.app.data.source.network
+package com.axuca.app.data.source.remote
 
-import com.axuca.app.data.model.Product
+import com.axuca.app.domain.model.Product
 import retrofit2.Response
 import retrofit2.http.GET
 

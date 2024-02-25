@@ -1,4 +1,4 @@
-package com.axuca.app.util
+package com.axuca.app.common
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner

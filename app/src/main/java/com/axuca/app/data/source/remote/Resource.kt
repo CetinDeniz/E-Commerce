@@ -1,4 +1,4 @@
-package com.axuca.app.data.source.network
+package com.axuca.app.data.source.remote
 
 sealed class Resource<out T> {
     data object Loading : Resource<Nothing>()

@@ -1,4 +1,4 @@
-package com.axuca.app.ui.dashboard
+package com.axuca.app.presentation.dashboard
 
 import android.os.Bundle
 import android.view.LayoutInflater

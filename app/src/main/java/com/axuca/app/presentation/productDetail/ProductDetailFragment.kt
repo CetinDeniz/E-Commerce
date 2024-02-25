@@ -1,4 +1,4 @@
-package com.axuca.app.ui.productDetail
+package com.axuca.app.presentation.productDetail
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

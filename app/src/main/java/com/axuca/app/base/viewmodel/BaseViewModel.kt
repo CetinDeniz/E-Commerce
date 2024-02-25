@@ -3,7 +3,7 @@ package com.axuca.app.base.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.axuca.app.base.State
-import com.axuca.app.data.source.network.Resource
+import com.axuca.app.data.source.remote.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.launchIn

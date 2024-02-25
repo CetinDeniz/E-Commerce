@@ -1,4 +1,4 @@
-package com.axuca.app.data.model
+package com.axuca.app.domain.model
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

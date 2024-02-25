@@ -3,8 +3,7 @@ package com.axuca.app.di
 import android.content.Context
 import com.axuca.app.BuildConfig
 import com.axuca.app.data.repository.NetworkRepository
-import com.axuca.app.data.source.network.NetworkService
-import com.chuckerteam.chucker.api.Chucker
+import com.axuca.app.data.source.remote.NetworkService
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager

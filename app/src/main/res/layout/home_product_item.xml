@@ -7,7 +7,7 @@
 
         <variable
             name="product"
-            type="com.axuca.app.data.model.Product" />
+            type="com.axuca.app.domain.model.Product" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

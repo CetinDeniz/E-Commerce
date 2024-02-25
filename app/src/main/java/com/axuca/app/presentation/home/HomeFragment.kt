@@ -1,4 +1,4 @@
-package com.axuca.app.ui.home
+package com.axuca.app.presentation.home
 
 import android.os.Bundle
 import android.os.Handler
@@ -9,11 +9,11 @@ import androidx.navigation.fragment.findNavController
 import com.axuca.app.R
 import com.axuca.app.base.adapter.BaseAdapter
 import com.axuca.app.base.fragment.BaseViewModelFragment
-import com.axuca.app.data.model.Product
+import com.axuca.app.domain.model.Product
 import com.axuca.app.databinding.FragmentHomeBinding
 import com.axuca.app.databinding.HomeProductItemBinding
-import com.axuca.app.util.addCarouselEffect
-import com.axuca.app.util.observe
+import com.axuca.app.common.addCarouselEffect
+import com.axuca.app.common.observe
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Runnable
 
@@ -64,7 +64,7 @@ class HomeFragment : BaseViewModelFragment<FragmentHomeBinding, HomeViewModel>()
     private fun onStateChanged(homeState: HomeViewModel.HomeState?) {
         when(homeState) {
             is HomeViewModel.HomeState.AllProducts -> {
-                (binding.productsRecycler.adapter as? BaseAdapter<*,Product>)?.submitItems(homeState.data)
+                (binding.productsRecycler.adapter as? BaseAdapter<*, Product>)?.submitItems(homeState.data)
             }
             else -> {}
         }

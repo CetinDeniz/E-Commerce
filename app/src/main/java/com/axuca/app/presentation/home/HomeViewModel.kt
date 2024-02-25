@@ -1,7 +1,7 @@
-package com.axuca.app.ui.home
+package com.axuca.app.presentation.home
 
 import com.axuca.app.base.viewmodel.BaseViewModel
-import com.axuca.app.data.model.Product
+import com.axuca.app.domain.model.Product
 import com.axuca.app.data.repository.NetworkRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

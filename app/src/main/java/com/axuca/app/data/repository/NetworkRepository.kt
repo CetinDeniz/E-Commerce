@@ -1,8 +1,8 @@
 package com.axuca.app.data.repository
 
-import com.axuca.app.data.model.Product
-import com.axuca.app.data.source.network.NetworkService
-import com.axuca.app.data.source.network.Resource
+import com.axuca.app.domain.model.Product
+import com.axuca.app.data.source.remote.NetworkService
+import com.axuca.app.data.source.remote.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch

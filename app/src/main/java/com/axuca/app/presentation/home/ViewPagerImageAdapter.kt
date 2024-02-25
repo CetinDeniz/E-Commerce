@@ -1,4 +1,4 @@
-package com.axuca.app.ui.home
+package com.axuca.app.presentation.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -11,7 +11,7 @@ import androidx.databinding.ViewDataBinding
 import com.axuca.app.base.viewmodel.BaseViewModel
 import com.axuca.app.base.State
 import com.axuca.app.databinding.LoadingOverlayBinding
-import com.axuca.app.util.observe
+import com.axuca.app.common.observe
 import timber.log.Timber
 
 abstract class BaseViewModelFragment<B : ViewDataBinding, V : BaseViewModel> : BaseFragment() {

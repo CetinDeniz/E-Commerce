@@ -1,4 +1,4 @@
-package com.axuca.app.util
+package com.axuca.app.common
 
 import androidx.viewpager2.widget.ViewPager2
 import kotlin.math.abs
