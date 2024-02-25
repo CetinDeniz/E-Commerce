@@ -59,7 +59,6 @@ class HomeFragment : BaseViewModelFragment<FragmentHomeBinding, HomeViewModel>()
     private fun onStateChanged(homeState: HomeViewModel.HomeState?) {
         when(homeState) {
             is HomeViewModel.HomeState.AllProducts -> {
-                Snackbar.make(binding.root, homeState.data.size.toString(), Snackbar.LENGTH_SHORT).show()
                 (binding.productsRecycler.adapter as? BaseAdapter<*,Product>)?.submitItems(homeState.data)
             }
             else -> {}
