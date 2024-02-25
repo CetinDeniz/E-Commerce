@@ -5,6 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.axuca.app.R
 import com.axuca.app.base.adapter.BaseAdapter
 import com.axuca.app.base.fragment.BaseViewModelFragment
@@ -13,7 +14,6 @@ import com.axuca.app.databinding.FragmentHomeBinding
 import com.axuca.app.databinding.HomeProductItemBinding
 import com.axuca.app.util.addCarouselEffect
 import com.axuca.app.util.observe
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Runnable
 
@@ -51,6 +51,11 @@ class HomeFragment : BaseViewModelFragment<FragmentHomeBinding, HomeViewModel>()
         val adapter2 = object: BaseAdapter<HomeProductItemBinding, Product>(R.layout.home_product_item) {
             override fun bind(binding: HomeProductItemBinding, item: Product) {
                 binding.product = item
+                binding.root.setOnClickListener {
+                    findNavController().navigate(
+                        HomeFragmentDirections.actionNavigationHomeToProductDetailFragment()
+                    )
+                }
             }
         }
         binding.productsRecycler.adapter = adapter2
