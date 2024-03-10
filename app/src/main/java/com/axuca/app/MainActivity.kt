@@ -54,4 +54,7 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(menu, navController)
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
+    }
 }

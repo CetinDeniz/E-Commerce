@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "58334481583",
+    "project_id": "base-project-12",
+    "storage_bucket": "base-project-12.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:58334481583:android:ff0335ff5fd7eaf077585a",
+        "android_client_info": {
+          "package_name": "com.axuca.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkV4BmPrsQp22s3EM8L-Xxi7hRDHpAU8I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

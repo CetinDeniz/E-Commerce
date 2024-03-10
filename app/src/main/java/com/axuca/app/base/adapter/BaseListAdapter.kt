@@ -1,19 +1,19 @@
 package com.axuca.app.base.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 
-class BaseAdapter<V : ViewDataBinding, T>(
+class BaseListAdapter<V : ViewDataBinding, T>(
     @LayoutRes private val layoutID: Int,
     private val onBind: (binding: V, item: T) -> Unit
-) : RecyclerView.Adapter<BaseViewHolder<V, T>>() {
-
-    private val items: ArrayList<T> = arrayListOf()
+) : ListAdapter<T, BaseViewHolder<V, T>>(ItemDiff<T>()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<V, T> {
         val binding = DataBindingUtil.inflate<V>(
@@ -26,14 +26,6 @@ class BaseAdapter<V : ViewDataBinding, T>(
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder<V, T>, position: Int) {
-        holder.bind(items[position])
-    }
-
-    override fun getItemCount() = items.size
-
-    fun submitItems(newItems: List<T>) {
-        items.clear()
-        items.addAll(newItems)
-        notifyDataSetChanged()
+        holder.bind(getItem(position))
     }
 }

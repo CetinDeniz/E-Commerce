@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.axuca.app.R
 import com.axuca.app.base.adapter.BaseAdapter
+import com.axuca.app.base.adapter.BaseListAdapter
 import com.axuca.app.base.fragment.BaseViewModelFragment
 import com.axuca.app.domain.model.Product
 import com.axuca.app.databinding.FragmentHomeBinding
@@ -48,23 +49,22 @@ class HomeFragment : BaseViewModelFragment<FragmentHomeBinding, HomeViewModel>()
         binding.viewpager.addCarouselEffect()
         startAutoScroll()
 
-        val adapter2 = object: BaseAdapter<HomeProductItemBinding, Product>(R.layout.home_product_item) {
-            override fun bind(binding: HomeProductItemBinding, item: Product) {
-                binding.product = item
-                binding.root.setOnClickListener {
-                    findNavController().navigate(
-                        HomeFragmentDirections.actionNavigationHomeToProductDetailFragment()
-                    )
-                }
+        val productAdapter = BaseListAdapter<HomeProductItemBinding, Product>(R.layout.home_product_item) { binding, item ->
+            binding.product = item
+            binding.root.setOnClickListener {
+                findNavController().navigate(
+                    HomeFragmentDirections.actionNavigationHomeToProductDetailFragment()
+                )
             }
         }
-        binding.productsRecycler.adapter = adapter2
+
+        binding.productsRecycler.adapter = productAdapter
     }
 
     private fun onStateChanged(homeState: HomeViewModel.HomeState?) {
         when(homeState) {
             is HomeViewModel.HomeState.AllProducts -> {
-                (binding.productsRecycler.adapter as? BaseAdapter<*, Product>)?.submitItems(homeState.data)
+                (binding.productsRecycler.adapter as? BaseListAdapter<*, Product>)?.submitList(homeState.data)
             }
             else -> {}
         }

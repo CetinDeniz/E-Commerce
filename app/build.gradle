@@ -7,6 +7,9 @@ plugins {
 
     id 'com.google.dagger.hilt.android'
     id 'androidx.navigation.safeargs.kotlin'
+
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -26,15 +29,17 @@ android {
     buildTypes {
         debug {
             debuggable true
-            applicationIdSuffix ".debug"
+            manifestPlaceholders = [crashlyticsCollectionEnabled:"false", analyticsCollectionEnabled:"false"]
             buildConfigField "String", "BASE_URL", "\"https://fakestoreapi.com/\""
         }
         release {
             debuggable false
             minifyEnabled true
             shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+            manifestPlaceholders = [crashlyticsCollectionEnabled:"true", analyticsCollectionEnabled:"true"]
             buildConfigField "String", "BASE_URL", "\"https://fakestoreapi.com/\""
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {
@@ -52,23 +57,23 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'androidx.core:core-ktx:1.12.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'com.google.android.material:material:1.11.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.7.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0'
 
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.3'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.7.3'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.7'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.7.7'
 
     // Splash Screen
     implementation "androidx.core:core-splashscreen:1.0.1"
 
     // Dependency Injection
-    implementation "com.google.dagger:hilt-android:2.48"
-    ksp 'com.google.dagger:hilt-compiler:2.48'
+    implementation "com.google.dagger:hilt-android:2.51"
+    ksp 'com.google.dagger:hilt-compiler:2.51'
 
     // Networking
     implementation 'com.squareup.okhttp3:logging-interceptor:4.11.0'
@@ -91,6 +96,11 @@ dependencies {
 
     // View
     implementation "com.airbnb.android:lottie:6.3.0"
+
+    // Firebase
+    implementation platform('com.google.firebase:firebase-bom:32.7.4')
+    implementation 'com.google.firebase:firebase-crashlytics'
+    implementation 'com.google.firebase:firebase-analytics'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
