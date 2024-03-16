@@ -1,13 +1,18 @@
 package com.axuca.app.base.fragment
 
+import android.app.ProgressDialog.show
+import android.graphics.Color
 import android.graphics.PixelFormat
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.axuca.app.R
 import com.axuca.app.base.viewmodel.BaseViewModel
 import com.axuca.app.base.State
 import com.axuca.app.databinding.LoadingOverlayBinding
@@ -21,7 +26,16 @@ abstract class BaseViewModelFragment<B : ViewDataBinding, V : BaseViewModel> : B
     private var _binding: B? = null
     protected val binding: B get() = _binding!!
 
-    private var loadingOverlay: LoadingOverlayBinding? = null
+    private val loadingOverlay: LoadingOverlayBinding by lazy {
+        LoadingOverlayBinding.inflate(LayoutInflater.from(requireContext()))
+    }
+    private val dialog: AlertDialog by lazy {
+        AlertDialog.Builder(requireContext()).create().apply {
+            setView(loadingOverlay.root)
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            setCancelable(false)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -68,30 +82,14 @@ abstract class BaseViewModelFragment<B : ViewDataBinding, V : BaseViewModel> : B
     }
 
     private fun showFullScreenOverlay() {
-        if (loadingOverlay == null) {
-            loadingOverlay = LoadingOverlayBinding.inflate(
-                LayoutInflater.from(requireContext())
-            )
-
-            val params = WindowManager.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.TYPE_APPLICATION_PANEL,
-                WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
-                PixelFormat.TRANSLUCENT
-            )
-
-            requireActivity().windowManager.addView(loadingOverlay?.root, params)
-            binding.root.visibility = View.INVISIBLE
-        }
+        binding.root.visibility = View.INVISIBLE
+        dialog.show()
     }
 
     private fun hideFullScreenOverlay() {
-        loadingOverlay?.let {
-            loadingOverlay = null
-            requireActivity().windowManager.removeViewImmediate(it.root)
-            binding.root.visibility = View.VISIBLE
-        }
+        dialog.dismiss()
+        binding.root.visibility = View.VISIBLE
+
     }
 
     override fun onDestroyView() {
