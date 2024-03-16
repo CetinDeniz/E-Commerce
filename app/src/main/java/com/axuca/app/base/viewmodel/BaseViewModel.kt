@@ -14,7 +14,7 @@ abstract class BaseViewModel : ViewModel() {
 
     fun <T> Flow<Resource<T>>.launchRequest(
         emitLoading: Boolean = true,
-        onError: () -> Unit = {},
+        onError: (throwable: Throwable) -> Unit = {},
         onComplete: suspend (T) -> Unit = {},
     ) {
         onEach {
@@ -30,7 +30,7 @@ abstract class BaseViewModel : ViewModel() {
 
                 is Resource.Error -> {
                     baseState.emit(State.Error(it.error))
-                    onError()
+                    onError(it.error)
                 }
             }
         }.launchIn(viewModelScope)

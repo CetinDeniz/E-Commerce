@@ -37,6 +37,8 @@ abstract class BaseViewModelFragment<B : ViewDataBinding, V : BaseViewModel> : B
         }
     }
 
+    private var initialRequestMade: Boolean = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -48,6 +50,11 @@ abstract class BaseViewModelFragment<B : ViewDataBinding, V : BaseViewModel> : B
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = viewLifecycleOwner
         observeBaseViewModelState()
+
+        if (!initialRequestMade) {
+            performInitialRequests()
+            initialRequestMade = true
+        }
     }
 
     private fun inflateBinding(inflater: LayoutInflater, container: ViewGroup?) {
@@ -89,8 +96,11 @@ abstract class BaseViewModelFragment<B : ViewDataBinding, V : BaseViewModel> : B
     private fun hideFullScreenOverlay() {
         dialog.dismiss()
         binding.root.visibility = View.VISIBLE
-
     }
+
+    open fun initUI() {}
+    open fun afterInitUI() {}
+    open fun performInitialRequests() {}
 
     override fun onDestroyView() {
         super.onDestroyView()

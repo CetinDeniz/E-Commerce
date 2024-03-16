@@ -52,9 +52,11 @@ class HomeFragment : BaseViewModelFragment<FragmentHomeBinding, HomeViewModel>()
         val productAdapter = BaseListAdapter<HomeProductItemBinding, Product>(R.layout.home_product_item) { binding, item ->
             binding.product = item
             binding.root.setOnClickListener {
-                findNavController().navigate(
-                    HomeFragmentDirections.actionNavigationHomeToProductDetailFragment()
-                )
+                item.id?.let {
+                    findNavController().navigate(
+                        HomeFragmentDirections.actionNavigationHomeToProductDetailFragment(it)
+                    )
+                }
             }
         }
 

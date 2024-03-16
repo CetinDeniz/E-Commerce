@@ -22,6 +22,10 @@ class NetworkRepository @Inject constructor(
         emit(Resource.Success(service.getProducts()))
     }.handleResponse()
 
+    fun getProduct(id: Int): Flow<Resource<Product>> = flow {
+        emit(Resource.Success(service.getProduct(id)))
+    }.handleResponse()
+
 
     private fun <V, T : Response<V>> Flow<Resource<T>>.handleResponse(): Flow<Resource<V>> =
         onStart { emit(Resource.Loading) }
